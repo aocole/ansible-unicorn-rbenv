@@ -1,4 +1,4 @@
 ---
-rvm_root: /usr/local/rvm
-rvm_exe: /usr/local/rvm/bin/rvm
+rbenv_root: /usr/local/rbenv
+rbenv_exe: /usr/local/rbenv/bin/rbenv
 rails_apps: []

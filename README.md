@@ -1,19 +1,19 @@
-Ansible Unicorn/RVM setup
+Ansible Unicorn/rbenv setup
 =========================
 
-This Ansible role installs a service for Unicorn, with RVM and multiple application support
+This Ansible role installs a service for Unicorn, with rbenv and multiple application support
 
 Requirements
 ------------
 
-Expects rvm to be installed system-wide
+Expects rbenv to be installed system-wide
 
 
 Role Variables
 --------------
 
--   `rvm_root` defaults to `/usr/local/rvm`
--   `rvm_exe`  defaults to `/usr/local/rvm/bin/rvm`
+-   `rbenv_root` defaults to `/usr/local/rbenv`
+-   `rbenv_exe`  defaults to `/usr/local/rbenv/bin/rbenv`
 -   `rails_apps` defaults to `[]`
 
     Each rails_apps entry is a dict with the following options
@@ -48,7 +48,7 @@ The role could be included in a playbook as follows:
 ---
 -hosts: application
   roles:
-    - role: unicorn-rvm
+    - role: unicorn-rbenv
       rails_apps:
         - { name: 'my_app1', ruby_version: 'ruby-1.9.3' }
         - { name: 'my_app2', ruby_version: 'ruby-2.1.1', root: '/var/test_apps/app2', env: staging }
@@ -75,15 +75,6 @@ Notes
 This role does not deploy the actual application, it assumes that this
 will be done in another role or using a deployment tool such as
 [Capistrano](https://github.com/capistrano/capistrano).
-
-However you deploy, keep in mind that this setup expects each
-application to use an rvm gemset with the name of the application.
-
-So for example, for a Capistrano 3 deployment of an app called 'my_app'
-under ruby 2.1.1, you should `require 'capistrano/rvm'` and set the following
-in your Capistrano configuration:
-
-`set :rvm_ruby_version, '2.1.1@my_app'`
 
 If you use this role to generate database.yml and secrets.yml, it is advised
 to store the keys in an ansible vault file
